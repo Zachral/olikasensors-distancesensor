@@ -22,7 +22,7 @@ int convert_cm(int value)
   integer_to_char(m_m,data_buffer,2);
   usart_putchar(data_buffer[1]);*/
   printf("cm\r\n");
-  if(c_m<015)
+  if(c_m< 010)
   {
     sprintf(buffer,"OBSTACLE DETECTED\r\n");
 	printf(buffer);

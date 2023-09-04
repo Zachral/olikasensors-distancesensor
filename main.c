@@ -4,11 +4,14 @@
 #include "uart.h"
 #include "ultrasonic_trigger_echo.h"
 
+#define RIGHT  1
+#define LEFT   2
+#define FRONT  3
 //https://wokwi.com/projects/290056311044833800
 
 char data_buffer[4],buffer[50];
 
-int distance = 0,c_m=0,m_m=0;
+int leftDistance = 0, rightDistance = 0, frontDistance = 0,c_m=0,m_m=0;
 
 int convert_cm(int value)
 {
@@ -27,7 +30,7 @@ int convert_cm(int value)
     sprintf(buffer,"OBSTACLE DETECTED\r\n");
 	printf(buffer);
    }
-
+   return 0;
 }
 
 
@@ -47,8 +50,12 @@ init_Ultrasonic_sensor();
 
 while(1)
 {
-	distance = get_distance_Ultrasonic_sensor();
-	convert_cm(distance);
+   rightDistance = get_distance_Ultrasonic_sensor(Right_Ultrasonic_Echo_pin); 
+   leftDistance = get_distance_Ultrasonic_sensor(Left_Ultrasonic_Echo_pin);
+   frontDistance = get_distance_Ultrasonic_sensor(Front_Ultrasonic_Echo_pin); 
+   convert_cm(leftDistance);
+   convert_cm(rightDistance);
+   convert_cm(frontDistance); 
 	_delay_ms(100);
 }
 

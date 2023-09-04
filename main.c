@@ -7,8 +7,9 @@
 //https://wokwi.com/projects/290056311044833800
 
 char data_buffer[4],buffer[50];
-
-int distance = 0,c_m=0,m_m=0;
+int leftDistance = 0,c_m=0,m_m=0;
+//int frontDistance = 0;//,c_m=0,m_m=0;
+//int rightDistance = 0;//,c_m=0,m_m=0;
 
 int convert_cm(int value)
 {
@@ -27,7 +28,7 @@ int convert_cm(int value)
     sprintf(buffer,"OBSTACLE DETECTED\r\n");
 	printf(buffer);
    }
-
+   return 0;
 }
 
 
@@ -47,8 +48,13 @@ init_Ultrasonic_sensor();
 
 while(1)
 {
-	distance = get_distance_Ultrasonic_sensor();
-	convert_cm(distance);
+   printf("I work");
+	leftDistance = get_distance_Ultrasonic_sensor(Left_Ultrasonic_Echo_pin);
+   //frontDistance = get_distance_Ultrasonic_sensor(Front_Ultrasonic_Echo_pin);
+   //rightDistance = get_distance_Ultrasonic_sensor(Left_Ultrasonic_Echo_pin);
+	convert_cm(leftDistance);
+   //convert_cm(frontDistance);
+   //convert_cm(rightDistance);
 	_delay_ms(100);
 }
 

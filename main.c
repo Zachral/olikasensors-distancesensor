@@ -3,6 +3,9 @@
 #include <avr/interrupt.h>
 #include "uart.h"
 #include "ultrasonic_trigger_echo.h"
+#include "analogWrite.h"
+#include "rgbLed.h"
+#include "millis.h"
 
 #define RIGHT  1
 #define LEFT   2
@@ -12,6 +15,8 @@
 char data_buffer[4],buffer[50];
 
 int leftDistance = 0, rightDistance = 0, frontDistance = 0,c_m=0,m_m=0;
+volatile millis_t timeSinceObstacleDetection = 0; 
+
 
 int convert_cm(int value)
 {
@@ -27,9 +32,15 @@ int convert_cm(int value)
   printf("cm\r\n");
   if(c_m< 010)
   {
-    sprintf(buffer,"OBSTACLE DETECTED\r\n");
+   analogWrite(RED_PIN, 255);
+   analogWrite(GREEN_PIN,-255);
+   analogWrite(BLUE_PIN,0);  
+   sprintf(buffer,"OBSTACLE DETECTED\r\n");
 	printf(buffer);
-   }
+   timeSinceObstacleDetection = millis_get(); 
+   
+  }
+
    return 0;
 }
 
@@ -39,12 +50,14 @@ int main(void)
 
 _delay_ms(1000);
 init_serial();
-
+millis_init();
+sei();
 
 // DDRB&=~(BIT3);
 // PORTB |= BIT3;
 
 init_Ultrasonic_sensor();
+init_Rgb_Led(); 
 
 
 
@@ -56,6 +69,7 @@ while(1)
    convert_cm(leftDistance);
    convert_cm(rightDistance);
    convert_cm(frontDistance); 
+   if (millis_get() - timeSinceObstacleDetection > 100) clear_all_TC();
 	_delay_ms(100);
 }
 

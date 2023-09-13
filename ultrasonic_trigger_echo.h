@@ -19,13 +19,13 @@
 #define BIT_(name)        CON_CAT(BIT,name)
 
 /*Need to change according to connections*/
-#define ULTRASONIC_PORT_IND        D            /*need to configure here */
-#define LEFT_ULTRASONIC_TRIGGER         3               /*need to configure trigger pin(0-7) */
-#define LEFT_ULTRASONIC_ECHO            2               /*need to configure echo pin(0-7) */
-#define RIGHT_ULTRASONIC_TRIGGER         5               /*need to configure trigger pin(0-7) */
-#define RIGHT_ULTRASONIC_ECHO            4 
-#define FRONT_ULTRASONIC_TRIGGER         7               /*need to configure trigger pin(0-7) */
-#define FRONT_ULTRASONIC_ECHO            6
+#define ULTRASONIC_PORT_IND             C            /*need to configure here */
+#define LEFT_ULTRASONIC_ECHO            0               /*need to configure echo pin(0-7) */
+#define LEFT_ULTRASONIC_TRIGGER         1               /*need to configure trigger pin(0-7) */
+#define FRONT_ULTRASONIC_ECHO           2               /*need to configure echo pin(0-7) */
+#define FRONT_ULTRASONIC_TRIGGER        3               /*need to configure trigger pin(0-7) */
+#define RIGHT_ULTRASONIC_ECHO           4                /*need to configure echo pin(0-7) */
+#define RIGHT_ULTRASONIC_TRIGGER        5               /*need to configure trigger pin(0-7) */
 /*  ULTRASONIC 1  */
 
 #define Ultrasonic_Triger_Port_Direction            DDR_(ULTRASONIC_PORT_IND)
